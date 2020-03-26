@@ -16,10 +16,46 @@ UsernameArgument = functools.partial(
 )
 
 OAuthToken = functools.partial(
-        eacycli.Argument,
-        'token', 'oauthtoken',
-        help='OAuth2 token'
+        easycli.Argument,
+        'oauthtoken',
+        help='OAuth2 token',
 )
+
+Name = functools.partial(
+        easycli.Argument,
+        'name',
+        help='Repository name',
+)
+
+Description = functools.partial(
+        easycli.Argument,
+        '-d', '--description',
+        help='Description',
+        default='',
+)
+
+Private = functools.partial(
+        easycli.Argument,
+        '-p', '--private',
+        help='Create a private repository',
+        default=False,
+)
+
+
+class CreateRepo(easycli.SubCommand):
+    __command__ = 'createrepo'
+    __aliases__ = ['c']
+    __arguments__ = [
+            Name(),
+            Description(),
+            Private(),
+    ]
+    
+    def __call__(self, args):
+        info = {'name' : args.name, 
+                'description' : args.description,
+                'private' : args.private}
+        print(hubexplorer.createrepo(info))
 
 class Login(easycli.SubCommand):
     __command__ = 'login'
@@ -27,6 +63,9 @@ class Login(easycli.SubCommand):
     __arguments__ = [
             OAuthToken(),
     ]
+
+    def __call__(self, args):
+        print(hubexplorer.login(args.token))
 
 class Repo(easycli.SubCommand):
     __command__ = 'repo'
@@ -51,6 +90,7 @@ class HubExplorer(easycli.Root):
         ),
         Repo,
         Login,
+        CreateRepo
     ]
 
     def __call__(self, args):
