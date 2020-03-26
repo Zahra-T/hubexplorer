@@ -61,11 +61,12 @@ class Login(easycli.SubCommand):
     __command__ = 'login'
     __aliases__ = ['l']
     __arguments__ = [
+            UsernameArgument(),
             OAuthToken(),
     ]
 
     def __call__(self, args):
-        print(hubexplorer.login(args.token))
+        print(hubexplorer.authentication(args.username, args.oauthtoken))
 
 class Repo(easycli.SubCommand):
     __command__ = 'repo'

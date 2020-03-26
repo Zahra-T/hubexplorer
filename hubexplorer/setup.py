@@ -8,6 +8,7 @@ with open(join(dirname(__file__), 'explorercli.py')) as f:
 dependencies = [
     'easycli',
     'requests',
+    'oauthlib',
 ]
 
 
