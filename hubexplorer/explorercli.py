@@ -46,6 +46,7 @@ class CreateRepo(easycli.SubCommand):
     __command__ = 'createrepo'
     __aliases__ = ['c']
     __arguments__ = [
+            UsernameArgument(),
             Name(),
             Description(),
             Private(),
@@ -55,7 +56,7 @@ class CreateRepo(easycli.SubCommand):
         info = {'name' : args.name, 
                 'description' : args.description,
                 'private' : args.private}
-        print(hubexplorer.createrepo(info))
+        print(hubexplorer.createrepo(args.username, info))
 
 class Login(easycli.SubCommand):
     __command__ = 'login'
