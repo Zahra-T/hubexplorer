@@ -9,13 +9,14 @@ dependencies = [
     'easycli',
     'requests',
     'oauthlib',
+    'requests_oauthlib',
 ]
 
 
 setup(
     name='hubexplorer',
     version=version,
-    py_modules=['explorercli'],
+    py_modules=['explorercli', 'hubexplorer'],
     install_requires=dependencies,
     include_package_data=True,
     license='MIT',

@@ -78,7 +78,7 @@ class Repo(easycli.SubCommand):
 
     def __call__(self, args):
         username = args.username
-        print(explorer.getrepos(username))
+        print(hubexplorer.getrepos(username))
         return
 
 
